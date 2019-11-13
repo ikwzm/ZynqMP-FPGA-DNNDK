@@ -1,0 +1,47 @@
+/dts-v1/; /plugin/;
+/ {
+	fragment@0 {
+		target-path = "/fpga-full";
+		__overlay__ {
+			firmware-name = "dpu_core.bin";
+		};
+        };
+	fragment@1 {
+		target-path = "/amba_pl@0";
+		__overlay__ {
+			afi0 {
+				compatible    = "xlnx,afi-fpga";
+				config-afi    = <4 0>, <5 0>, <6 0>, <7 0>, <8 2>, <9 2>, <15 0>;
+			};
+			fclk0 {
+				compatible    = "ikwzm,fclkcfg-0.10.a";
+				clocks        = <&zynqmp_clk 0x47>;
+				insert-rate   = "100000000";
+				insert-enable = <1>;
+				remove-rate   = "1000000";
+				remove-enable = <0>;
+			};
+		};
+	};
+	fragment@2 {
+		target-path = "/amba_pl@0";
+		#address-cells = <2>;
+		#size-cells = <2>;
+
+		__overlay__ {
+			#address-cells = <2>;
+			#size-cells = <2>;
+
+			dpu {
+				compatible = "xilinx,dpu";
+				base-addr = <0x8f000000>;
+				dpucore {
+					compatible = "xilinx,dpucore";
+					interrupt-parent = <&gic>;
+					interrupts = <0 89 4>;
+					core-num = <0x1>;
+				};
+	                };
+		};
+	};
+};

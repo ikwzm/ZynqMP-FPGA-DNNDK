@@ -1,0 +1,33 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+package  = xlnx-dnndk
+deb_arch = arm64
+docdir   = debian/tmp/usr/share/doc/$(package)
+
+clean:
+	rm -f build
+	-$(MAKE) clean
+	rm -rf debian/tmp debian/*~ debian/files* debian/substvars
+
+build:
+	$(MAKE) all
+	touch build
+
+binary-indep: build
+
+binary-arch: build
+	rm -rf debian/tmp
+	install -d debian/tmp/DEBIAN $(docdir)
+	$(MAKE) prefix=$(CURDIR)/debian/tmp install
+	cp -a debian/copyright $(docdir)
+	cp -a debian/changelog $(docdir)/changelog.Debian
+	cp -a Changelog        $(docdir)/changelog
+	cd $(docdir) && gzip -9 changelog changelog.Debian
+	dpkg-gencontrol -DArchitecture=$(deb_arch)
+	cp -a debian/postinst  debian/tmp/DEBIAN
+	chown -R root:root debian/tmp
+	chmod -$ u+w,go=rX debian/tmp
+	dpkg-deb --build debian/tmp ..
+
+binary: binary-arch binary-indep
