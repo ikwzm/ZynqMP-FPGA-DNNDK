@@ -88,7 +88,7 @@ DPU Features    : Avg-Pooling, LeakyReLU/ReLU6, Depthwise Conv
 shell$ sudo ./dtbocfg.rb -r dpu
 ```
 
-Build 
+Build Debian Packages
 ----------------------------------------------------------------------------
 
 ### Download
@@ -99,7 +99,7 @@ shell$ cd ZynqMP-FPGA-DNNDK
 shell$ git clone https://github.com/Xilinx/Edge-AI-Platform-Tutorials
 ```
 
-### Build dnndk
+### Build dnndk debian package
 
 ```console
 shell$ cd xlnx-dnndk/
@@ -112,7 +112,7 @@ shell$ file xlnx-dnndk_0.3.3-0_arm64.deb
 xlnx-dnndk_0.3.3-0_arm64.deb: Debian binary package (format 2.0)
 ```
 
-### Build dpu kernel module (self compile)
+### Build dpu kernel module debian packages (self compile)
 
 ```console
 shell$ cd xlnx-dpu-kmod/
@@ -125,7 +125,7 @@ shell$ file xlnx-dpu-v2019.1-zynqmp-fpga_1.3.0-0_arm64.deb
 xlnx-dpu-v2019.1-zynqmp-fpga_1.3.0-0_arm64.deb: Debian binary package (format 2.0)
 ```
 
-### Build dpu kernel module (cross compile)
+### Build dpu kernel module debian package (cross compile)
 
 ```console
 shell$ cd xlnx-dpu-kmod/
