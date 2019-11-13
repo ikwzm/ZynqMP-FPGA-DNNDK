@@ -64,10 +64,12 @@ shell$ sudo ./dtbocfg.rb -i dpu --dts dpu_core.dts
 [ 2885.482595] fclkcfg amba_pl@0:fclk0: clock  enabled : 1
 [ 2885.487820] fclkcfg amba_pl@0:fclk0: remove rate    : 1000000
 [ 2885.493569] fclkcfg amba_pl@0:fclk0: remove enable  : 0
+shell$
+shell$ sudo modprobe dpu
 [ 2885.499796] [DPU][4937]Found DPU signature addr = 0x8f000000 in device-tree
 [ 2885.506781] [DPU][4937]Checking DPU signature at addr = 0x8ff00000, 
 [ 2885.513202] [DPU][4937]DPU signature checking done!
-
+shell$
 shell$ dexplorer -w
 [DPU IP Spec]
 IP  Timestamp   : 2019-08-28 13:00:00
